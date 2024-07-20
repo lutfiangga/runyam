@@ -39,7 +39,7 @@ class Auth extends CI_Controller
         redirect('Dashboard', 'refresh');
     } else {
         $this->session->set_flashdata('error', 'Username atau Password salah!');
-        redirect('Auth', 'refresh');
+        redirect('Index/index', 'refresh');
     }
 }
 

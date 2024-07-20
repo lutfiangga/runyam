@@ -12,7 +12,7 @@
                                 Kami
                             </span>
                         </h2>
-                        <p class="mt-6text-gray-500">
+                        <p class="mt-6 text-gray-500">
                             Rangkaian fitur khusus kami untuk menyempurnakan pengambilan sampah di Dusun Karangber.
                         </p>
                     </div>
@@ -55,13 +55,12 @@
                 </section>
                 <div class="overflow-hidden lg:col-span-3 rounded-lg">
                     <div class="card">
-                        <div class="card-body">
-                            <div class="content" id="map" style="height: 300px; border-radius: 1rem;"></div>
+                        <div class="card-body relative">
+                            <div class="content" id="map" style="height: 300px; border-radius: 1rem; position: relative; z-index: 1;"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 </section>
