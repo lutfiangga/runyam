@@ -1,0 +1,10 @@
+[19-Apr-2024 21:11:23 UTC] PHP Notice:  Undefined index: log_path in /home/jojf1353/public_html/kersantriwidadi.com/system/core/Log.php on line 128
+[19-Apr-2024 21:11:23 UTC] PHP Notice:  Undefined index: log_path in /home/jojf1353/public_html/kersantriwidadi.com/system/core/Log.php on line 128
+[19-Apr-2024 21:11:23 UTC] PHP Warning:  mkdir(): Invalid path in /home/jojf1353/public_html/kersantriwidadi.com/system/core/Log.php on line 132
+[19-Apr-2024 21:11:23 UTC] PHP Notice:  Undefined index: log_threshold in /home/jojf1353/public_html/kersantriwidadi.com/system/core/Log.php on line 139
+[19-Apr-2024 21:11:23 UTC] PHP Notice:  Undefined index: log_threshold in /home/jojf1353/public_html/kersantriwidadi.com/system/core/Log.php on line 143
+[20-Apr-2024 00:34:11 UTC] PHP Notice:  Undefined index: log_path in /home/jojf1353/public_html/kersantriwidadi.com/system/core/Log.php on line 128
+[20-Apr-2024 00:34:11 UTC] PHP Notice:  Undefined index: log_path in /home/jojf1353/public_html/kersantriwidadi.com/system/core/Log.php on line 128
+[20-Apr-2024 00:34:11 UTC] PHP Warning:  mkdir(): Invalid path in /home/jojf1353/public_html/kersantriwidadi.com/system/core/Log.php on line 132
+[20-Apr-2024 00:34:11 UTC] PHP Notice:  Undefined index: log_threshold in /home/jojf1353/public_html/kersantriwidadi.com/system/core/Log.php on line 139
+[20-Apr-2024 00:34:11 UTC] PHP Notice:  Undefined index: log_threshold in /home/jojf1353/public_html/kersantriwidadi.com/system/core/Log.php on line 143
