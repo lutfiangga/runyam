@@ -31,11 +31,16 @@
                     <i class="align-middle" data-feather="map"></i> <span class="align-middle">Rute</span>
                 </a>
             </li>
+            <li class="sidebar-item <?= ($active_menu == 'aduan') ? 'active' : ''; ?>">
+                <a class="sidebar-link" href="<?= site_url('Aduan'); ?>">
+                    <i class="align-middle" data-feather="message-circle"></i> <span class="align-middle">Aduan</span>
+                </a>
+            </li>
 
             <li class="sidebar-header">Logout</li>
 
             <li class="sidebar-item <?= ($active_menu == 'logout') ? 'active' : ''; ?>">
-                <a class="sidebar-link" data-bs-toggle="modal" data-bs-target="#confirmLogout<?= $id_user; ?>"> <i class="align-middle" data-feather="power"></i> <span class="align-middle">Logout</span></a>
+                <a class="sidebar-link" data-bs-toggle="modal" data-bs-target="#confirmLogout<?= $id_user; ?>"> <i class="align-middle" data-feather="log-out"></i> <span class="align-middle">Logout</span></a>
             </li>
 
         </ul>

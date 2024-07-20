@@ -7,6 +7,7 @@ class Dashboard extends CI_Controller
     {
         parent::__construct();
         //mengaktifkan session dengan demikian halaman ini jika dipanggil kini membutuhkan session
+        IsAdmin();
         $this->load->model('M_rute');
     }
     public function index()

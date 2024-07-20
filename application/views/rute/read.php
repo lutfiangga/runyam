@@ -16,6 +16,8 @@
                                 <th>No</th>
                                 <th>Lokasi</th>
                                 <th>Posisi</th>
+                                <th>Hari</th>
+                                <th>Jam</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -29,6 +31,8 @@
                                     <td><?= $no ?></td>
                                     <td><?= $row['lokasi'] ?></td>
                                     <td><?= $row['posisi'] ?></td>
+                                    <td><?= $row['hari'] ?></td>
+                                    <td><?= $row['waktu'] ?></td>
                                     <td>
                                         <div class="gap-1 d-flex">
                                             <a class="btn btn-secondary" href="<?= site_url('Rute/detail/' . $row['id_rute']) ?>">
