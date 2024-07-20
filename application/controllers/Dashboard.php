@@ -8,7 +8,6 @@ class Dashboard extends CI_Controller
         parent::__construct();
         //mengaktifkan session dengan demikian halaman ini jika dipanggil kini membutuhkan session
         $this->load->model('M_rute');
-
     }
     public function index()
     {
@@ -16,8 +15,13 @@ class Dashboard extends CI_Controller
             'judul' => "BERANDA",
             'sub' => "Beranda",
             'active_menu' => 'dashboard',
-            'rute' => $this->M_rute->GetAll(),		
-           
+            'id_user' => $this->session->userdata('id_user'),
+            'nama' => $this->session->userdata('nama'),
+            'username' => $this->session->userdata('username'),
+            'password' => $this->session->userdata('password'),
+            'foto' => 'assets/img/photos/' . $this->session->userdata('img_user'),
+            'rute' => $this->M_rute->GetAll(),
+
         );
         $this->template->load('layout/template', $this->view . 'read', $data);
 

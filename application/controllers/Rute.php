@@ -9,6 +9,7 @@ class Rute extends CI_Controller
     {
         parent::__construct();
         //control rt menghubungkan model M_rt
+        IsAdmin();
         $this->load->model('M_rute');
     }
     function index()
@@ -20,7 +21,9 @@ class Rute extends CI_Controller
             'active_menu' => 'rute',	
             'id_user' => $this->session->userdata('id_user'),
             'nama' => $this->session->userdata('nama'),
-            'img_user_path' => 'assets/img_user/' . $this->session->userdata('img_user'),
+            'username' => $this->session->userdata('username'),
+            'password' => $this->session->userdata('password'),
+            'foto' => 'assets/img/photos/' . $this->session->userdata('img_user'),
             'read' => $this->M_rute->GetAll(),
         );
         $this->template->load('layout/template', $this->view . 'read', $data);
@@ -33,7 +36,9 @@ class Rute extends CI_Controller
             'active_menu' => 'rute',
             'id_user' => $this->session->userdata('id_user'),
             'nama' => $this->session->userdata('nama'),
-            'img_user_path' => 'assets/img_user/' . $this->session->userdata('img_user'),
+            'username' => $this->session->userdata('username'),
+            'password' => $this->session->userdata('password'),
+            'foto' => 'assets/img/photos/' . $this->session->userdata('img_user'),
             'create' => '',
         );
         $this->template->load('layout/template', $this->view . 'create', $data);
@@ -72,7 +77,9 @@ class Rute extends CI_Controller
             'active_menu' => 'rute',
             'id_user' => $this->session->userdata('id_user'),
             'nama' => $this->session->userdata('nama'),
-            'img_user_path' => 'assets/img_user/' . $this->session->userdata('img_user'),
+            'username' => $this->session->userdata('username'),
+            'password' => $this->session->userdata('password'),
+            'foto' => 'assets/img/photos/' . $this->session->userdata('img_user'),
             'edit' => $this->M_rute->edit($id),
         );
         $this->template->load('layout/template', $this->view . 'edit', $data);
@@ -87,7 +94,9 @@ class Rute extends CI_Controller
             'active_menu' => 'rute',
             'id_user' => $this->session->userdata('id_user'),
             'nama' => $this->session->userdata('nama'),
-            'img_user_path' => 'assets/img_user/' . $this->session->userdata('img_user'),
+            'username' => $this->session->userdata('username'),
+            'password' => $this->session->userdata('password'),
+            'foto' => 'assets/img/photos/' . $this->session->userdata('img_user'),
             'detail' => $this->M_rute->edit($id),
         );
         $this->template->load('layout/template', $this->view . 'detail', $data);

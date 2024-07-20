@@ -26,6 +26,4 @@ class M_profile extends CI_Model
         $this->db->where($this->pk, $id);
         $this->db->update($this->table, $data);
     }
-
-    // Add other model functions here
 }

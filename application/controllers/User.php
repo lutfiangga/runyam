@@ -7,7 +7,7 @@ class User extends CI_Controller
   public function __construct()
   {
     parent::__construct();
-    // IsAdmin();
+    IsAdmin();
     $this->load->model('M_user');
     $this->load->helper('text');
     $this->load->library('form_validation');
@@ -20,7 +20,9 @@ class User extends CI_Controller
       'active_menu' => 'user',
       'id_user' => $this->session->userdata('id_user'),
       'nama' => $this->session->userdata('nama'),
-      'img_user_path' => 'assets/img_user/' . $this->session->userdata('img_user'),
+      'username' => $this->session->userdata('username'),
+      'password' => $this->session->userdata('password'),
+      'foto' => 'assets/img/photos/' . $this->session->userdata('img_user'),
       'read' => $this->M_user->GetAll(),
     );
     $this->template->load('layout/template', $this->view . 'read', $data);
@@ -33,7 +35,9 @@ class User extends CI_Controller
       'active_menu' => 'user',
       'id_user' => $this->session->userdata('id_user'),
       'nama' => $this->session->userdata('nama'),
-      'img_user_path' => 'assets/img_user/' . $this->session->userdata('img_user'),
+      'username' => $this->session->userdata('username'),
+      'password' => $this->session->userdata('password'),
+      'foto' => 'assets/img/photos/' . $this->session->userdata('img_user'),
       'create' => '',
     );
     $this->template->load('layout/template', $this->view . 'create', $data);
@@ -41,37 +45,32 @@ class User extends CI_Controller
 
   public function save()
   {
-    $this->form_validation->set_rules('id_user', 'Kode User', 'required|is_unique[user.id_user]');
     $this->form_validation->set_rules('username', 'Username', 'required|is_unique[user.username]');
 
     if ($this->form_validation->run() == FALSE) {
-      // Validasi gagal, kembali ke halaman registrasi dengan error
-      $data = array(
-        'judul' => "DATA USER",
-        'sub' => "Data User",
-        'active_menu' => 'user',
-        'id' => $this->session->userdata('id'),
-        'nama' => $this->session->userdata('nama'),
-        'img_user_path' => 'assets/img_user/' . $this->session->userdata('img_user'),
-        'create' => '',
-        'kode_error' => form_error('id_user'),
-        // Menggunakan form_error() untuk mendapatkan pesan kesalahan Kode User
-        'username_error' => form_error('username') // Menggunakan form_error() untuk mendapatkan pesan kesalahan Username
-      );
-      $this->template->load('layout/template', $this->view . 'create', $data);
+      // Validasi gagal, simpan pesan error ke flashdata
+      $this->session->set_flashdata('register_error', validation_errors());
+      redirect('User/create'); // Redirect kembali ke halaman tambah user
     } else {
-      // Validasi berhasil, simpan data pengguna baru
+      $last_id = $this->M_user->getLastId();
+
+      // jika tidak ditemukan, id_user diisi 1
+      if ($last_id == null) {
+        $id_user = 1;
+      } else {
+        // jika ditemukan, tambahkan 1 pada id_user terakhir
+        $id_user = $last_id + 1;
+      }
       $data = array(
-        'id_user' => $this->input->post('id_user'),
-        'nama' => $this->input->post('nama'),
-        'email' => $this->input->post('email'),
+        'id_user' => $id_user,
         'username' => $this->input->post('username'),
         'password' => $this->input->post('password'),
-        'jabatan' => $this->input->post('jabatan'),
-        'img_user' => 'user.png'
+        'nama' => $this->input->post('nama'),
+        'role' => 'admin',
+        'img_user' => 'user.png',
       );
       $this->M_user->save($data);
-
+      //dengan $this->redirect artinya memanggil private $redirect = "rt"
       redirect($this->redirect, 'refresh');
     }
   }
@@ -84,9 +83,11 @@ class User extends CI_Controller
       'judul' => "DATA USER",
       'sub' => "Data User",
       'active_menu' => 'user',
-      'id' => $this->session->userdata('id'),
+      'id_user' => $this->session->userdata('id_user'),
       'nama' => $this->session->userdata('nama'),
-      'img_user_path' => 'assets/img_user/' . $this->session->userdata('img_user'),
+      'username' => $this->session->userdata('username'),
+      'password' => $this->session->userdata('password'),
+      'foto' => 'assets/img/photos/' . $this->session->userdata('img_user'),
       'edit' => $this->M_user->edit($id),
     );
     $this->template->load('layout/template', $this->view . 'edit', $data);
@@ -127,28 +128,28 @@ class User extends CI_Controller
     }
 
     if ($this->form_validation->run() == FALSE) {
-      // Validasi gagal, kembali ke halaman edit dengan error
+      // Validasi gagal, simpan pesan error ke flashdata
+      $this->session->set_flashdata('username_error', validation_errors());
       $data = array(
         'judul' => "DATA USER",
         'sub' => "Data User",
         'active_menu' => 'user',
-        'id' => $this->session->userdata('id'),
+        'id_user' => $this->session->userdata('id_user'),
         'nama' => $this->session->userdata('nama'),
-        'img_user_path' => 'assets/img_user/' . $this->session->userdata('img_user'),
+        'username' => $this->session->userdata('username'),
+        'password' => $this->session->userdata('password'),
+        'foto' => 'assets/img/photos/' . $this->session->userdata('img_user'),
         'edit' => $this->M_user->edit($id),
-        'username_error' => form_error('username')
+        // 'username_error' => form_error('username')
       );
       $this->template->load('layout/template', $this->view . 'edit', $data);
     } else {
       // Validasi berhasil, simpan data pengguna baru
       $data = array(
-        // 'id_user' => $this->input->post('id_user'),
-        'nama' => $this->input->post('nama'),
-        'email' => $this->input->post('email'),
         'username' => $this->input->post('username'),
         'password' => $this->input->post('password'),
-        'jabatan' => $this->input->post('jabatan'),
-        // Jika tidak ada gambar baru, gunakan gambar yang sudah ada
+        'nama' => $this->input->post('nama'),
+        'role' => 'admin',
         'img_user' => isset($img_user) ? $img_user : $user->img_user
       );
 

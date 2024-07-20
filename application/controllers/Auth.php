@@ -8,17 +8,15 @@ class Auth extends CI_Controller
         parent::__construct();
         //Load model
         $this->load->model('M_auth');
-        $this->load->model('M_dusun');
     }
 
     public function index()
     {
         $this->session->sess_destroy();
         $data = array(
-            'dusun' => $this->M_dusun->getAll()->row(),
             'login' => ''
         );
-        $this->load->view('backend/Login', $data);
+        $this->load->view('auth', $data);
     }
 
     public function login()
@@ -30,15 +28,15 @@ class Auth extends CI_Controller
     if (!empty($data) && $data['password'] == $pwd && $data['username'] == $user) {
         $array = array(
             'id_user' => $data['id_user'],
+            'role' => $data['role'],
             'nama' => $data['nama'],
             'username' => $data['username'],
-            'email' => $data['email'],
+            'password' => $data['password'],
             'img_user' => $data['img_user'],
-            'jabatan' => $data['jabatan'],
             'IsAdmin' => 1,
         );
         $this->session->set_userdata($array);
-        redirect('Home', 'refresh');
+        redirect('Dashboard', 'refresh');
     } else {
         $this->session->set_flashdata('error', 'Username atau Password salah!');
         redirect('Auth', 'refresh');
