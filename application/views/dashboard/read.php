@@ -94,7 +94,7 @@
     </div>
 
     <div class="row">
-        <div class="col-12 col-md-6 col-xxl-6 d-flex order-2 order-xxl-3">
+        <div class="col-12 col-md-12 col-xxl-6 d-flex order-2 order-xxl-3">
             <div class="card flex-fill w-100">
                 <div class="card-header">
 
