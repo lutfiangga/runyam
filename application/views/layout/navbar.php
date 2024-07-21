@@ -31,6 +31,11 @@
                     <i class="align-middle" data-feather="map"></i> <span class="align-middle">Rute</span>
                 </a>
             </li>
+            <li class="sidebar-item <?= ($active_menu == 'sampah') ? 'active' : ''; ?>">
+                <a class="sidebar-link" href="<?= site_url('Sampah'); ?>">
+                    <i class="align-middle" data-feather="trash"></i> <span class="align-middle">Sampah</span>
+                </a>
+            </li>
             <li class="sidebar-item <?= ($active_menu == 'aduan') ? 'active' : ''; ?>">
                 <a class="sidebar-link" href="<?= site_url('Aduan'); ?>">
                     <i class="align-middle" data-feather="message-circle"></i> <span class="align-middle">Aduan</span>

@@ -1,4 +1,6 @@
 <script src="<?= base_url(); ?>assets/js/app.js"></script>
+
+<!-- datatables -->
 <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
 <script>
     $(document).ready(function() {
@@ -30,36 +32,34 @@
     });
 </script>
 
+<!-- chart -->
+
+<!-- chart data pengambilan sampah -->
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        var ctx = document.getElementById("chartjs-dashboard-line").getContext("2d");
+        var ctx = document.getElementById("grafik-pengambilan-sampah").getContext("2d");
         var gradient = ctx.createLinearGradient(0, 0, 0, 225);
         gradient.addColorStop(0, "rgba(215, 227, 244, 1)");
         gradient.addColorStop(1, "rgba(215, 227, 244, 0)");
         // Line chart
-        new Chart(document.getElementById("chartjs-dashboard-line"), {
+
+        var labels = [];
+        var data = [];
+
+        <?php foreach ($sampah as $row) : ?>
+            labels.push('<?= $row['tanggal'] ?>');
+            data.push(<?= $row['count'] ?>);
+        <?php endforeach; ?>
+        new Chart(document.getElementById("grafik-pengambilan-sampah"), {
             type: "line",
             data: {
-                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                labels: labels,
                 datasets: [{
-                    label: "Sales ($)",
+                    label: "Jumlah pengmabilan dalam Kg",
                     fill: true,
                     backgroundColor: gradient,
                     borderColor: window.theme.primary,
-                    data: [
-                        2115,
-                        1562,
-                        1584,
-                        1892,
-                        1587,
-                        1923,
-                        2566,
-                        2448,
-                        2805,
-                        3438,
-                        2917,
-                        3327
-                    ]
+                    data: data
                 }]
             },
             options: {
@@ -100,20 +100,37 @@
         });
     });
 </script>
+
+<!-- chart kategori sampah -->
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        // Pie chart
-        new Chart(document.getElementById("chartjs-dashboard-pie"), {
+        var labels = [];
+        var data = [];
+        var backgroundColors = [];
+
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        <?php foreach ($kategori_sampah as $row) : ?>
+            labels.push('<?= $row->kategori ?>');
+            data.push(<?= $row->total_jumlah ?>);
+            backgroundColors.push(getRandomColor());
+        <?php endforeach; ?>
+
+        var ctx = document.getElementById("chartjs-dashboard-pie").getContext("2d");
+        new Chart(ctx, {
             type: "pie",
             data: {
-                labels: ["Chrome", "Firefox", "IE"],
+                labels: labels,
                 datasets: [{
-                    data: [4306, 3801, 1689],
-                    backgroundColor: [
-                        window.theme.primary,
-                        window.theme.warning,
-                        window.theme.danger
-                    ],
+                    data: data,
+                    backgroundColor: backgroundColors,
                     borderWidth: 5
                 }]
             },
@@ -128,126 +145,29 @@
         });
     });
 </script>
+
+<!-- datepicker -->
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        // Bar chart
-        new Chart(document.getElementById("chartjs-dashboard-bar"), {
-            type: "bar",
-            data: {
-                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                datasets: [{
-                    label: "This year",
-                    backgroundColor: window.theme.primary,
-                    borderColor: window.theme.primary,
-                    hoverBackgroundColor: window.theme.primary,
-                    hoverBorderColor: window.theme.primary,
-                    data: [54, 67, 41, 55, 62, 45, 55, 73, 60, 76, 48, 79],
-                    barPercentage: .75,
-                    categoryPercentage: .5
-                }]
-            },
-            options: {
-                maintainAspectRatio: false,
-                legend: {
-                    display: false
-                },
-                scales: {
-                    yAxes: [{
-                        gridLines: {
-                            display: false
-                        },
-                        stacked: false,
-                        ticks: {
-                            stepSize: 20
-                        }
-                    }],
-                    xAxes: [{
-                        stacked: false,
-                        gridLines: {
-                            color: "transparent"
-                        }
-                    }]
+        var elements = document.getElementsByClassName("datetimepicker");
+
+        Array.prototype.forEach.call(elements, function(element) {
+            var isFlatpickrActive = false;
+
+            element.addEventListener("click", function() {
+                if (isFlatpickrActive) {
+                    element._flatpickr.destroy();
+                    isFlatpickrActive = false;
+                } else {
+                    flatpickr(element, {
+                        inline: true,
+                        prevArrow: "<span title=\"Previous month\">&laquo;</span>",
+                        nextArrow: "<span title=\"Next month\">&raquo;</span>",
+                        defaultDate: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000)
+                    });
+                    isFlatpickrActive = true;
                 }
-            }
-        });
-    });
-</script>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var markers = [{
-                coords: [31.230391, 121.473701],
-                name: "Shanghai"
-            },
-            {
-                coords: [28.704060, 77.102493],
-                name: "Delhi"
-            },
-            {
-                coords: [6.524379, 3.379206],
-                name: "Lagos"
-            },
-            {
-                coords: [35.689487, 139.691711],
-                name: "Tokyo"
-            },
-            {
-                coords: [23.129110, 113.264381],
-                name: "Guangzhou"
-            },
-            {
-                coords: [40.7127837, -74.0059413],
-                name: "New York"
-            },
-            {
-                coords: [34.052235, -118.243683],
-                name: "Los Angeles"
-            },
-            {
-                coords: [41.878113, -87.629799],
-                name: "Chicago"
-            },
-            {
-                coords: [51.507351, -0.127758],
-                name: "London"
-            },
-            {
-                coords: [40.416775, -3.703790],
-                name: "Madrid "
-            }
-        ];
-        var map = new jsVectorMap({
-            map: "world",
-            selector: "#world_map",
-            zoomButtons: true,
-            markers: markers,
-            markerStyle: {
-                initial: {
-                    r: 9,
-                    strokeWidth: 7,
-                    stokeOpacity: .4,
-                    fill: window.theme.primary
-                },
-                hover: {
-                    fill: window.theme.primary,
-                    stroke: window.theme.primary
-                }
-            },
-            zoomOnScroll: false
-        });
-        window.addEventListener("resize", () => {
-            map.updateSize();
-        });
-    });
-</script>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var date = new Date(Date.now() - 5 * 24 * 60 * 60 * 1000);
-        var defaultDate = date.getUTCFullYear() + "-" + (date.getUTCMonth() + 1) + "-" + date.getUTCDate();
-        document.getElementById("datetimepicker-dashboard").flatpickr({
-            inline: true,
-            prevArrow: "<span title=\"Previous month\">&laquo;</span>",
-            nextArrow: "<span title=\"Next month\">&raquo;</span>",
-            defaultDate: defaultDate
+            });
         });
     });
 </script>

@@ -53,4 +53,8 @@ class M_aduan extends CI_Model
 
         return $result[$this->pk];
     }
+    public function countAduan()
+    {
+        return $this->db->count_all($this->table);
+    }
 }

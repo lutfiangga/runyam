@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3333
--- Generation Time: Jul 20, 2024 at 02:48 PM
+-- Generation Time: Jul 21, 2024 at 02:39 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.3.9
 
@@ -74,9 +74,10 @@ INSERT INTO `rute` (`id_rute`, `lokasi`, `latitude`, `longitude`, `posisi`, `har
 --
 
 CREATE TABLE `sampah` (
-  `id_dampah` int NOT NULL,
-  `kategori` int NOT NULL,
-  `jumlah_sampah` int NOT NULL
+  `id_sampah` bigint NOT NULL,
+  `jumlah` bigint NOT NULL,
+  `tanggal` date NOT NULL,
+  `kategori` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -120,6 +121,12 @@ ALTER TABLE `rute`
   ADD PRIMARY KEY (`id_rute`);
 
 --
+-- Indexes for table `sampah`
+--
+ALTER TABLE `sampah`
+  ADD PRIMARY KEY (`id_sampah`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -140,6 +147,12 @@ ALTER TABLE `aduan`
 --
 ALTER TABLE `rute`
   MODIFY `id_rute` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `sampah`
+--
+ALTER TABLE `sampah`
+  MODIFY `id_sampah` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `user`

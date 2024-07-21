@@ -9,6 +9,9 @@ class Dashboard extends CI_Controller
         //mengaktifkan session dengan demikian halaman ini jika dipanggil kini membutuhkan session
         IsAdmin();
         $this->load->model('M_rute');
+        $this->load->model('M_user');
+        $this->load->model('M_sampah');
+        $this->load->model('M_aduan');
     }
     public function index()
     {
@@ -22,6 +25,12 @@ class Dashboard extends CI_Controller
             'password' => $this->session->userdata('password'),
             'foto' => 'assets/img/photos/' . $this->session->userdata('img_user'),
             'rute' => $this->M_rute->GetAll(),
+            'user' => $this->M_user->countUser(),
+            'jumlah_rute' => $this->M_rute->countRute(),
+            'total_sampah' =>  $this->M_sampah->getTotal(),
+            'kategori_sampah' =>  $this->M_sampah->getTotalbyKategori(),
+            'total_aduan' =>  $this->M_aduan->countAduan(),
+            'sampah' => $this->M_sampah->GetSampah(),
 
         );
         $this->template->load('layout/template', $this->view . 'read', $data);

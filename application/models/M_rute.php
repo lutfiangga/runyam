@@ -53,4 +53,9 @@ class M_rute extends CI_Model
 
         return $result[$this->pk];
     }
+
+    public function countRute()
+    {
+        return $this->db->count_all($this->table);
+    }
 }
