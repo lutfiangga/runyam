@@ -3,7 +3,7 @@
 <nav class="fixed z-20 w-full bg-gray-900/80 backdrop-blur navbar border-b border-gray-800 shadow-none">
     <div class="xl:container px-6 md:px-12 lg:px-6">
         <div class="flex flex-wrap items-center justify-between gap-6 md:py-3 md:gap-0 lg:py-5">
-            <div class="w-full flex items-center justify-between lg:w-auto">
+            <div class="lg:ml-12 w-full flex items-center justify-between lg:w-auto">
                 <a href="<?= site_url('Index') ?>" class="relative z-10 flex items-center" aria-label="logo">
                     <svg class="h-9 text-[#00B1FD]" viewBox="0 0 942 272" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="126.5" cy="135.5" r="49" stroke="none" strokeWidth="11" fill="currentColor" />
